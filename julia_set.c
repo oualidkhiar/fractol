@@ -6,7 +6,7 @@
 /*   By: oukhiar <oukhiar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:54:22 by oukhiar           #+#    #+#             */
-/*   Updated: 2025/02/21 02:48:43 by oukhiar          ###   ########.fr       */
+/*   Updated: 2025/02/21 12:55:36 by oukhiar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int ft_check_pixel_in_julia_set(double z_real, double z_img)
     int iter = 0;
     double tmp;
     norm = z_real * z_real + z_img * z_img;
-    // printf("norm = %f\n", norm );
+
     while (norm <= 4.0 && iter < MAX_ITER)
     {
         tmp = z_real;
@@ -33,14 +33,14 @@ int ft_check_pixel_in_julia_set(double z_real, double z_img)
     return (iter);
 }
 
-static t_collor *ft_get_color(int iter)
+static t_collor *get_color(int iter, int quantity_blue, int quantity_red, int quantity_green)
 {
     t_collor *ret;
 
     ret = malloc(sizeof(t_collor));
-    ret->red = (iter * 4) % 255;
-    ret->green = (iter * 10) % 255;
-    ret->blue = (iter * 5) % 255;
+    ret->red = (iter * (4 + quantity_red)) % 255;
+    ret->green = (iter * (2 + quantity_green)) % 255;
+    ret->blue = (iter * (5 + quantity_blue)) % 255;
     ret->collor = (ret->red << 16) | (ret->green << 8) | ret->blue;
     return (ret);
 }
@@ -65,7 +65,7 @@ void julia(t_img *img, t_graph graph)
                 ft_put_pixel(img, x, y, 0x000000);
             else
             {
-                collor = ft_get_color(iter);
+                collor = get_color(iter, graph.quantity_blue, graph.quantity_red, graph.quantity_green);
                 ft_put_pixel(img, x, y, collor->collor);
                 free(collor);
             }

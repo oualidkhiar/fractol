@@ -6,7 +6,7 @@
 /*   By: oukhiar <oukhiar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 11:51:02 by oukhiar           #+#    #+#             */
-/*   Updated: 2025/02/21 01:42:51 by oukhiar          ###   ########.fr       */
+/*   Updated: 2025/02/21 13:06:27 by oukhiar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,58 @@ static void scroll_down_up(int key_pressed, t_graph *graph)
     }
 }
 
+void increment_color_target(int key, t_graph *target)
+{
+    if (key == 98)
+    {
+        target->quantity_blue += 2;
+        if (target->quantity_blue > MAX_COLOR)
+            target->quantity_blue = 0;
+    }
+    else if (key == 114)
+    {
+        target->quantity_red += 2;
+        if (target->quantity_red > MAX_COLOR)
+            target->quantity_red = 0;
+    }
+    else if (key == 103)
+    {
+        target->quantity_green += 2;
+        if (target->quantity_green > MAX_COLOR)
+            target->quantity_green = 0;
+    }
+}
+
+void dicrement_color_target(int key, t_graph *target)
+{
+    if (key == 65435)
+    {
+        target->quantity_blue -= 2;
+        if (target->quantity_blue < MIN_COLOR)
+            target->quantity_blue = 0;
+    }
+    else if (key == 65436)
+    {
+        target->quantity_red -= 2;
+        if (target->quantity_red < MIN_COLOR)
+            target->quantity_red = 0;
+    }
+    else if (key == 65433)
+    {
+        target->quantity_green -= 2;
+        if (target->quantity_green < MIN_COLOR)
+            target->quantity_green = 0;
+    }
+}
+
+
 int check_key(int key_pressed, t_mlx_data *mlx)
 {
-    if (key_pressed == 65307)
+    if (key_pressed == 98 || key_pressed == 114 || key_pressed == 103)
+        increment_color_target(key_pressed, &mlx->graph);
+    else if (key_pressed == 65436 || key_pressed == 65433 || key_pressed == 65435)
+        dicrement_color_target(key_pressed, &mlx->graph);
+    else if (key_pressed == 65307)
     {
         mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_win);
         mlx_destroy_display(mlx->mlx_ptr);

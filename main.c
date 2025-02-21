@@ -6,7 +6,7 @@
 /*   By: oukhiar <oukhiar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:03:55 by oukhiar           #+#    #+#             */
-/*   Updated: 2025/02/20 22:53:51 by oukhiar          ###   ########.fr       */
+/*   Updated: 2025/02/21 12:30:37 by oukhiar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int main(int ac, char **av)
     mlx.graph.x_end = 2;
     mlx.graph.y_start = -2;
     mlx.graph.y_end = 2;
+    mlx.graph.quantity_blue = 0;
+    mlx.graph.quantity_red = 0;
+    mlx.graph.quantity_green = 0;
     if (ac == 1)
         exit(0);
     if (!ft_strncmp("mandelbrot", av[1], 10) && !(ft_strlen(av[1]) - 10))

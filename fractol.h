@@ -6,7 +6,7 @@
 /*   By: oukhiar <oukhiar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:55:43 by oukhiar           #+#    #+#             */
-/*   Updated: 2025/02/21 02:34:12 by oukhiar          ###   ########.fr       */
+/*   Updated: 2025/02/21 13:08:54 by oukhiar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 
 # define HEIGHT 1000
 # define WIDTH 1000
-# define MAX_ITER 100 
+# define MAX_ITER 100
+# define MAX_COLOR 255
+# define MIN_COLOR 0
 
 typedef struct s_collor
 {   
@@ -31,13 +33,15 @@ typedef struct s_collor
     int          green;
 }   t_collor;
 
-
 typedef struct s_graph {
     double x_start;
     double x_end;
     double y_start;
     double y_end;
     double offset;
+    int    quantity_blue;
+    int     quantity_red;
+    int     quantity_green;
 } t_graph;
 
 typedef struct s_img {
