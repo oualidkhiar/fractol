@@ -6,7 +6,7 @@
 /*   By: oukhiar <oukhiar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:00:56 by oukhiar           #+#    #+#             */
-/*   Updated: 2025/02/21 02:24:43 by oukhiar          ###   ########.fr       */
+/*   Updated: 2025/02/22 05:08:21 by oukhiar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ t_img *new_image(t_mlx_data *mlx)
 int render_next_frame(t_mlx_data *mlx)
 {
     mlx->new_img = new_image(mlx);
-    if (mlx->flag == 1)
+    if (mlx->flag == -1)
         mandelbrot(mlx->new_img, mlx->graph);
-    else if (mlx->flag == 2)
-        julia(mlx->new_img, mlx->graph);
+    if (mlx->flag == 2)
+    {
+        double c_real = ft_atoi(mlx->c_real);
+        double c_img = ft_atoi(mlx->c_img);
+        julia(mlx->new_img, mlx->graph, c_real, c_img);
+    }
     mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->new_img->img, 0, 0);
     ft_destroy_img(mlx);
     return 0;

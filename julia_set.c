@@ -6,16 +6,13 @@
 /*   By: oukhiar <oukhiar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:54:22 by oukhiar           #+#    #+#             */
-/*   Updated: 2025/02/21 12:55:36 by oukhiar          ###   ########.fr       */
+/*   Updated: 2025/02/21 22:11:52 by oukhiar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static double julia_c_real = -0.8;
-static double julia_c_img = 0.156;
-
-int ft_check_pixel_in_julia_set(double z_real, double z_img)
+int ft_check_pixel_in_julia_set(double z_real, double z_img, double julia_c_real, double julia_c_img)
 {
     double norm;
     int iter = 0;
@@ -38,14 +35,14 @@ static t_collor *get_color(int iter, int quantity_blue, int quantity_red, int qu
     t_collor *ret;
 
     ret = malloc(sizeof(t_collor));
-    ret->red = (iter * (4 + quantity_red)) % 255;
-    ret->green = (iter * (2 + quantity_green)) % 255;
-    ret->blue = (iter * (5 + quantity_blue)) % 255;
+    ret->red = (iter * (6 + quantity_red)) % 255;
+    ret->green = (iter * (4 + quantity_green)) % 255;
+    ret->blue = (iter * (10 + quantity_blue)) % 255;
     ret->collor = (ret->red << 16) | (ret->green << 8) | ret->blue;
     return (ret);
 }
 
-void julia(t_img *img, t_graph graph)
+void julia(t_img *img, t_graph graph, double julia_c_real,double julia_c_img)
 {
     double mapped_x;
     double mapped_y;
@@ -60,7 +57,7 @@ void julia(t_img *img, t_graph graph)
         while (x < WIDTH)
         {
             mapped_x = ((double)x / WIDTH) * (graph.x_end - graph.x_start) + graph.x_start;
-            int iter = ft_check_pixel_in_julia_set(mapped_x, mapped_y);
+            int iter = ft_check_pixel_in_julia_set(mapped_x, mapped_y, julia_c_real, julia_c_img);
             if (iter == MAX_ITER)
                 ft_put_pixel(img, x, y, 0x000000);
             else

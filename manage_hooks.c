@@ -6,7 +6,7 @@
 /*   By: oukhiar <oukhiar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 11:51:02 by oukhiar           #+#    #+#             */
-/*   Updated: 2025/02/21 13:06:27 by oukhiar          ###   ########.fr       */
+/*   Updated: 2025/02/22 04:35:22 by oukhiar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,10 @@ int check_key(int key_pressed, t_mlx_data *mlx)
         mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_win);
         mlx_destroy_display(mlx->mlx_ptr);
         free(mlx->mlx_ptr);
+        if (mlx->c_img)
+            free(mlx->c_img);
+        if (mlx->c_real)
+            free(mlx->c_real);
         exit(0);
     }
     else if (key_pressed == 65362 || key_pressed == 65364)
