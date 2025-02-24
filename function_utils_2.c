@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   function_utils.c                                   :+:      :+:    :+:   */
+/*   function_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oukhiar <oukhiar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 12:25:11 by oukhiar           #+#    #+#             */
-/*   Updated: 2025/02/22 03:40:25 by oukhiar          ###   ########.fr       */
+/*   Created: 2025/02/23 20:12:07 by oukhiar           #+#    #+#             */
+/*   Updated: 2025/02/23 21:53:33 by oukhiar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,6 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return (0);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (!s)
-		return ;
-	while (*s)
-	{
-		write(fd, s, 1);
-		s++;
-	}
 }
 
 char	*ft_strdup(const char *s1)
@@ -109,13 +88,12 @@ static size_t	countlen(char const *s1, char const *set)
 	return (i);
 }
 
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	i;
 	size_t	j;
 	size_t	last_s1;
-	char *ret;
+	char	*ret;
 
 	if (!s1 || !set)
 		return (0);
@@ -136,76 +114,4 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	ret = ft_substr(s1, i, last_s1 - i + 1);
 	return (ret);
-}
-
-int	ft_is_valid(char *str)
-{
-	int	i;
-	int seen;
-	int seen_space;
-
-	seen = 0;
-	seen_space = 0;
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (str[i] == ' ')
-		{
-			if (seen_space)
-				return(0);
-			seen_space = 1;
-			seen = 0;
-		}
-		else if (str[i] == '.')
-		{
-			if (seen)
-				return (0);
-			seen = 1;
-		}
-		else if (str[i] < 48 || str[i] > 57)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-double	ft_atoi(const char *str)
-{
-	double	res;
-	double	div;
-	double	result;
-	int 	sign;
-
-	res = 0.0;
-	div = 10.0;
-	result = 0.0;
-	sign = 1;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (*str && *str >= 48 && *str <= 57)
-	{
-		res = res * (double)10 + (double)*str - (double)48;
-		str++;
-	}
-	if (*str == '.')
-	{
-		str++;
-		while (*str && *str >= 48 && *str <= 57)
-		{
-			result = result + (*str - 48) / div;
-			div *= 10;
-			str++;
-		}
-	}
-	return ((result + res) * sign);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot_set.c                                   :+:      :+:    :+:   */
+/*   fractol_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oukhiar <oukhiar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 12:08:37 by oukhiar           #+#    #+#             */
-/*   Updated: 2025/02/24 00:09:05 by oukhiar          ###   ########.fr       */
+/*   Created: 2025/02/24 00:41:48 by oukhiar           #+#    #+#             */
+/*   Updated: 2025/02/24 14:19:26 by oukhiar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ static int	check_pixel_in_mandelbrot_set(double cx_real, double cy_img)
 	while (norm <= 4.0 && iter < MAX_ITER)
 	{
 		tmp = z_real;
-		z_real = z_real * z_real - (z_img * z_img) + cx_real;
-		z_img = 2.0 * tmp * z_img + cy_img;
+		z_real = z_real * ((z_real * z_real) - 3 * (z_img * z_img)) + cx_real;
+		z_img = z_img * (3 * (tmp * tmp) - (z_img * z_img)) + cy_img;
 		norm = z_real * z_real + z_img * z_img;
 		iter++;
 	}
 	return (iter);
 }
 
-void	mandelbrot(t_img *img, t_graph graph)
+void	bonus_fract(t_img *img, t_graph graph)
 {
 	t_stored	stor;
 	double		mapped_y;
